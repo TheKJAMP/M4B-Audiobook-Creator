@@ -6,6 +6,20 @@ A user-friendly GUI tool for creating M4B audiobook files with metadata and chap
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)
 
+
+
+<img width="1403" height="838" alt="grafik" src="https://github.com/user-attachments/assets/4fa8a290-405c-4471-914b-b0c2bc94607e" />
+
+<img width="893" height="593" alt="grafik" src="https://github.com/user-attachments/assets/fafcbe07-58e3-41f4-af3b-6486c0a097e4" />
+
+<img width="902" height="1017" alt="grafik" src="https://github.com/user-attachments/assets/cab5e7e7-fce1-4f6f-a888-c6b1e6981ce7" />
+
+
+
+
+
+
+
 ## Features
 
 ### Core Functionality
