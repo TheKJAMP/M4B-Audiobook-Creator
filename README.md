@@ -8,6 +8,8 @@ A user-friendly GUI tool for creating M4B audiobook files with metadata and chap
 
 
 
+## Screenshots
+
 <img width="1403" height="838" alt="grafik" src="https://github.com/user-attachments/assets/4fa8a290-405c-4471-914b-b0c2bc94607e" />
 
 <img width="893" height="593" alt="grafik" src="https://github.com/user-attachments/assets/fafcbe07-58e3-41f4-af3b-6486c0a097e4" />
@@ -45,9 +47,7 @@ A user-friendly GUI tool for creating M4B audiobook files with metadata and chap
 - **Drag & Drop Support** - Drop folders directly into the application
 - **Multi-Folder Selection** - Add multiple folders in one operation
 
-## Screenshots
 
-*Coming soon - Add screenshots of your application here*
 
 ## Requirements
 
@@ -66,12 +66,12 @@ Or use winget:
 winget install Gyan.FFmpeg
 ```
 
-#### macOS
+#### macOS (Not tested:)
 ```bash
 brew install ffmpeg
 ```
 
-#### Linux
+#### Linux (Not tested:)
 ```bash
 # Debian/Ubuntu
 sudo apt install ffmpeg
