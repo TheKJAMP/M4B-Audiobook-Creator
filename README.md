@@ -110,7 +110,7 @@ ffmpeg -version
 
 ### Option 2: Standalone Executable (Windows)
 
-1. Download the latest release from the [Releases](https://github.com/yourusername/m4b-creator/releases) page
+1. Download the latest release from the [Releases](https://github.com/TheKJAMP/M4B-Audiobook-Creator-Generated-by-AI/releases) page
 2. Extract the archive
 3. Run `m4b_creator.exe`
 4. **Note:** FFmpeg must still be installed separately
