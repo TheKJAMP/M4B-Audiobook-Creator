@@ -16,6 +16,327 @@ import threading
 from PIL import Image, ImageTk
 
 
+# Mehrsprachige Texte
+TRANSLATIONS = {
+    'de': {
+        # Hauptfenster
+        'window_title': 'M4B Creator - Batch-Verarbeitung',
+
+        # Ordnerliste
+        'folder_list_title': 'Ordner-Liste (Drag & Drop unterstützt)',
+        'add_folder': '+ Ordner',
+        'remove_folder': '- Entfernen',
+        'clear_list': 'Liste leeren',
+        'files_count': '{count} Dateien',
+
+        # Batch-Aktionen
+        'batch_actions': 'Batch-Aktionen',
+        'apply_metadata_all': 'Metadaten auf alle anwenden',
+
+        # Einstellungen
+        'settings': 'Einstellungen',
+        'quality': 'Qualität:',
+        'original': 'Original',
+        'new_aac': 'Neu (AAC 128k)',
+        'subfolders': 'Unterordner:',
+        'recursive': 'Rekursiv',
+        'recursive_checkbox': 'Rekursiv',
+
+        # Ausgabe
+        'output': 'Ausgabe',
+        'output_folder': 'Ausgabeordner:',
+        'empty_source_folder': 'Leer = Quellordner',
+
+        # Buttons
+        'start_batch': '⚡ Batch-Verarbeitung starten',
+        'status': 'Status',
+
+        # Tabs
+        'tab_chapters': 'Kapitel-Reihenfolge',
+        'tab_metadata': 'Metadaten',
+        'tab_overview': 'Übersicht',
+        'no_selection': 'Keine Auswahl',
+
+        # Kapitel-Tab
+        'chapters_title': 'Kapitel: {name}',
+        'move_up': '↑ Nach oben',
+        'move_down': '↓ Nach unten',
+        'refresh': '🔄 Aktualisieren',
+
+        # Metadaten-Tab
+        'metadata_title': 'Metadaten: {name}',
+        'cover_artwork': 'Cover-Artwork',
+        'no_cover': 'Kein Cover',
+        'change_cover': 'Cover ändern',
+        'extract_cover': 'Cover extrahieren',
+        'remove_cover': 'Cover entfernen',
+        'output_name': 'Ausgabename:',
+        'title': 'Titel:',
+        'artist': 'Autor:',
+        'album': 'Album/Buch:',
+        'year': 'Jahr:',
+        'genre': 'Genre:',
+        'save_changes': '💾 Änderungen speichern',
+
+        # Übersicht-Tab
+        'overview_title': 'Übersicht: {name}',
+        'folder_name': 'Ordnername',
+        'path': 'Pfad',
+        'output_filename': 'Ausgabename',
+        'file_count': 'Anzahl Dateien',
+        'recursive_yes': 'Ja',
+        'recursive_no': 'Nein',
+        'audio_files': 'Audiodateien',
+        'total_duration': 'Gesamtdauer',
+        'hours': 'Stunden',
+        'minutes': 'Minuten',
+
+        # Dialoge
+        'add_multiple_folders': 'Mehrere Ordner hinzufügen?',
+        'add_multiple_folders_msg': 'Möchten Sie mehrere Ordner gleichzeitig auswählen?\n\nJa = Mehrere Ordner nacheinander auswählen (mit Abbrechen beenden)\nNein = Nur einen Ordner auswählen',
+        'select_folder': 'Ordner auswählen (Abbrechen zum Beenden)',
+        'select_audio_folder': 'Ordner mit Audiodateien auswählen',
+        'no_files_found': 'Keine Dateien',
+        'no_audio_files': 'Keine Audiodateien in {folder} gefunden!',
+        'success': 'Erfolg',
+        'folders_added': '{count} Ordner hinzugefügt!',
+        'folder_added': 'Ordner hinzugefügt!',
+        'folders_dropped': '{count} Ordner per Drag & Drop hinzugefügt!',
+        'folder_dropped': 'Ordner per Drag & Drop hinzugefügt!',
+        'remove_folder_confirm': "'{name}' aus der Liste entfernen?",
+        'clear_all_confirm': 'Alle Ordner entfernen?',
+        'confirm': 'Bestätigen',
+        'no_folders': 'Keine Ordner',
+        'add_folders_first': 'Bitte erst Ordner hinzufügen!',
+        'metadata_applied': 'Metadaten auf {count} Ordner angewendet!',
+        'saved': 'Gespeichert',
+        'changes_saved': 'Änderungen wurden gespeichert!',
+        'cover_changed': 'Cover wurde geändert!',
+        'cover_saved': 'Cover gespeichert:\n{path}',
+        'cover_removed': 'Cover wurde entfernt!',
+        'no_custom_cover': 'Kein benutzerdefiniertes Cover vorhanden!',
+        'no_cover_found': 'Kein Cover',
+        'no_cover_to_extract': 'Kein Cover zum Extrahieren gefunden!',
+        'error': 'Fehler',
+        'add_folder_first': 'Bitte mindestens einen Ordner hinzufügen!',
+        'batch_complete': 'Alle {count} M4B-Dateien wurden erfolgreich erstellt!',
+        'partial_success': 'Teilweise erfolgreich',
+        'partial_success_msg': 'Erfolgreich: {success}\nFehlgeschlagen: {failed}\n\nSiehe Status-Log für Details.',
+
+        # Batch-Metadaten-Dialog
+        'batch_metadata_title': 'Metadaten auf alle Ordner anwenden',
+        'batch_metadata_info': 'Diese Metadaten werden auf ALLE Ordner angewendet:',
+        'batch_metadata_hint': 'Leere Felder werden übersprungen (nicht überschrieben).',
+        'batch_metadata_note': 'Hinweis: Der Titel und Albumname werden NICHT überschrieben,\nda diese für jeden Ordner individuell sein sollten.',
+        'no_data': 'Keine Daten',
+        'fill_one_field': 'Bitte mindestens ein Feld ausfüllen!',
+        'cancel': 'Abbrechen',
+        'apply': 'Anwenden',
+
+        # Status-Nachrichten
+        'creating_concat_list': 'Erstelle Konkatenierungsliste...',
+        'extracting_cover': 'Extrahiere Cover-Art...',
+        'using_custom_cover': 'Verwende benutzerdefiniertes Cover: {name}',
+        'cover_found': 'Cover-Art gefunden in: {name}',
+        'creating_metadata': 'Erstelle Metadaten-Datei mit Kapiteln...',
+        'creating_m4b_original': 'Erstelle M4B-Datei (Original-Qualität)...',
+        'creating_m4b_convert': 'Konvertiere zu M4B...',
+        'ffmpeg_running': 'FFmpeg läuft...',
+        'm4b_created': 'M4B-Datei erfolgreich erstellt!',
+        'batch_started': '=== Batch-Verarbeitung gestartet ===',
+        'batch_count': 'Anzahl Ordner: {count}',
+        'audio_mode': 'Audio-Modus: {mode}',
+        'audio_mode_copy': 'Original kopieren',
+        'audio_mode_encode': 'Neu codieren',
+        'processing': '[{current}/{total}] Verarbeite: {name}',
+        'warning_no_files': 'WARNUNG: Keine Audiodateien!',
+        'files': 'Dateien: {count}',
+        'chapters': 'Kapitel: {count}',
+        'output_file': 'Ausgabe: {path}',
+        'success_created': '✓ ERFOLG: {name}.m4b erstellt!',
+        'error_failed': '✗ FEHLER: Konnte nicht erstellt werden!',
+        'error_msg': '✗ FEHLER: {msg}',
+        'batch_completed': '=== Batch-Verarbeitung abgeschlossen ===',
+        'total': 'Gesamt: {count} Ordner',
+        'successful': 'Erfolgreich: {count}',
+        'failed': 'Fehlgeschlagen: {count}',
+
+        # Datei-Dialoge
+        'select_cover': 'Cover-Bild auswählen',
+        'image_files': 'Bild-Dateien',
+        'all_files': 'Alle Dateien',
+        'save_cover': 'Cover speichern unter',
+        'select_output_folder': 'Ausgabeordner wählen',
+
+        # Sprache
+        'language': '🌐 Sprache: Deutsch',
+        'switch_language': 'Switch to English',
+
+        # Dialog-Buttons
+        'yes': 'Ja',
+        'no': 'Nein',
+    },
+    'en': {
+        # Main window
+        'window_title': 'M4B Creator - Batch Processing',
+
+        # Folder list
+        'folder_list_title': 'Folder List (Drag & Drop supported)',
+        'add_folder': '+ Add Folder',
+        'remove_folder': '- Remove',
+        'clear_list': 'Clear List',
+        'files_count': '{count} Files',
+
+        # Batch actions
+        'batch_actions': 'Batch Actions',
+        'apply_metadata_all': 'Apply Metadata to All',
+
+        # Settings
+        'settings': 'Settings',
+        'quality': 'Quality:',
+        'original': 'Original',
+        'new_aac': 'New (AAC 128k)',
+        'subfolders': 'Subfolders:',
+        'recursive': 'Recursive',
+        'recursive_checkbox': 'Recursive',
+
+        # Output
+        'output': 'Output',
+        'output_folder': 'Output Folder:',
+        'empty_source_folder': 'Empty = Source Folder',
+
+        # Buttons
+        'start_batch': '⚡ Start Batch Processing',
+        'status': 'Status',
+
+        # Tabs
+        'tab_chapters': 'Chapter Order',
+        'tab_metadata': 'Metadata',
+        'tab_overview': 'Overview',
+        'no_selection': 'No Selection',
+
+        # Chapters tab
+        'chapters_title': 'Chapters: {name}',
+        'move_up': '↑ Move Up',
+        'move_down': '↓ Move Down',
+        'refresh': '🔄 Refresh',
+
+        # Metadata tab
+        'metadata_title': 'Metadata: {name}',
+        'cover_artwork': 'Cover Artwork',
+        'no_cover': 'No Cover',
+        'change_cover': 'Change Cover',
+        'extract_cover': 'Extract Cover',
+        'remove_cover': 'Remove Cover',
+        'output_name': 'Output Name:',
+        'title': 'Title:',
+        'artist': 'Author:',
+        'album': 'Album/Book:',
+        'year': 'Year:',
+        'genre': 'Genre:',
+        'save_changes': '💾 Save Changes',
+
+        # Overview tab
+        'overview_title': 'Overview: {name}',
+        'folder_name': 'Folder Name',
+        'path': 'Path',
+        'output_filename': 'Output Name',
+        'file_count': 'Number of Files',
+        'recursive_yes': 'Yes',
+        'recursive_no': 'No',
+        'audio_files': 'Audio Files',
+        'total_duration': 'Total Duration',
+        'hours': 'Hours',
+        'minutes': 'Minutes',
+
+        # Dialogs
+        'add_multiple_folders': 'Add Multiple Folders?',
+        'add_multiple_folders_msg': 'Would you like to select multiple folders at once?\n\nYes = Add multiple folders one by one (cancel to finish)\nNo = Add only one folder',
+        'select_folder': 'Select Folder (Cancel to finish)',
+        'select_audio_folder': 'Select Folder with Audio Files',
+        'no_files_found': 'No Files',
+        'no_audio_files': 'No audio files found in {folder}!',
+        'success': 'Success',
+        'folders_added': '{count} folders added!',
+        'folder_added': 'Folder added!',
+        'folders_dropped': '{count} folders added via Drag & Drop!',
+        'folder_dropped': 'Folder added via Drag & Drop!',
+        'remove_folder_confirm': "Remove '{name}' from list?",
+        'clear_all_confirm': 'Remove all folders?',
+        'confirm': 'Confirm',
+        'no_folders': 'No Folders',
+        'add_folders_first': 'Please add folders first!',
+        'metadata_applied': 'Metadata applied to {count} folders!',
+        'saved': 'Saved',
+        'changes_saved': 'Changes have been saved!',
+        'cover_changed': 'Cover has been changed!',
+        'cover_saved': 'Cover saved:\n{path}',
+        'cover_removed': 'Cover has been removed!',
+        'no_custom_cover': 'No custom cover available!',
+        'no_cover_found': 'No Cover',
+        'no_cover_to_extract': 'No cover found to extract!',
+        'error': 'Error',
+        'add_folder_first': 'Please add at least one folder!',
+        'batch_complete': 'All {count} M4B files created successfully!',
+        'partial_success': 'Partially Successful',
+        'partial_success_msg': 'Successful: {success}\nFailed: {failed}\n\nSee status log for details.',
+
+        # Batch metadata dialog
+        'batch_metadata_title': 'Apply Metadata to All Folders',
+        'batch_metadata_info': 'This metadata will be applied to ALL folders:',
+        'batch_metadata_hint': 'Empty fields will be skipped (not overwritten).',
+        'batch_metadata_note': 'Note: Title and album name will NOT be overwritten,\nas they should be individual for each folder.',
+        'no_data': 'No Data',
+        'fill_one_field': 'Please fill in at least one field!',
+        'cancel': 'Cancel',
+        'apply': 'Apply',
+
+        # Status messages
+        'creating_concat_list': 'Creating concatenation list...',
+        'extracting_cover': 'Extracting cover art...',
+        'using_custom_cover': 'Using custom cover: {name}',
+        'cover_found': 'Cover art found in: {name}',
+        'creating_metadata': 'Creating metadata file with chapters...',
+        'creating_m4b_original': 'Creating M4B file (original quality)...',
+        'creating_m4b_convert': 'Converting to M4B...',
+        'ffmpeg_running': 'FFmpeg running...',
+        'm4b_created': 'M4B file created successfully!',
+        'batch_started': '=== Batch Processing Started ===',
+        'batch_count': 'Number of Folders: {count}',
+        'audio_mode': 'Audio Mode: {mode}',
+        'audio_mode_copy': 'Copy Original',
+        'audio_mode_encode': 'Re-encode',
+        'processing': '[{current}/{total}] Processing: {name}',
+        'warning_no_files': 'WARNING: No audio files!',
+        'files': 'Files: {count}',
+        'chapters': 'Chapters: {count}',
+        'output_file': 'Output: {path}',
+        'success_created': '✓ SUCCESS: {name}.m4b created!',
+        'error_failed': '✗ ERROR: Could not be created!',
+        'error_msg': '✗ ERROR: {msg}',
+        'batch_completed': '=== Batch Processing Completed ===',
+        'total': 'Total: {count} Folders',
+        'successful': 'Successful: {count}',
+        'failed': 'Failed: {count}',
+
+        # File dialogs
+        'select_cover': 'Select Cover Image',
+        'image_files': 'Image Files',
+        'all_files': 'All Files',
+        'save_cover': 'Save Cover As',
+        'select_output_folder': 'Select Output Folder',
+
+        # Language
+        'language': '🌐 Language: English',
+        'switch_language': 'Wechsel zu Deutsch',
+
+        # Dialog buttons
+        'yes': 'Yes',
+        'no': 'No',
+    }
+}
+
+
 class AudioFile:
     """Repräsentiert eine Audiodatei mit Metadaten"""
 
@@ -293,41 +614,43 @@ class M4BCreator:
 class BatchMetadataDialog:
     """Dialog zum Anwenden von Metadaten auf alle Ordner"""
 
-    def __init__(self, parent):
+    def __init__(self, parent, language='de'):
         self.metadata = {}
         self.result = False
+        self.language = language
 
         self.dialog = tk.Toplevel(parent)
-        self.dialog.title("Metadaten auf alle Ordner anwenden")
+        self.dialog.title(self.t('batch_metadata_title'))
         self.dialog.geometry("600x400")
         self.dialog.transient(parent)
         self.dialog.grab_set()
 
         self.setup_ui()
 
-        # Zentriere Dialog
-        self.dialog.update_idletasks()
-        x = parent.winfo_x() + (parent.winfo_width() // 2) - (self.dialog.winfo_width() // 2)
-        y = parent.winfo_y() + (parent.winfo_height() // 2) - (self.dialog.winfo_height() // 2)
-        self.dialog.geometry(f"+{x}+{y}")
+    def t(self, key: str, **kwargs) -> str:
+        """Übersetzt einen Schlüssel"""
+        text = TRANSLATIONS[self.language].get(key, key)
+        if kwargs:
+            return text.format(**kwargs)
+        return text
 
     def setup_ui(self):
         """Erstellt die Benutzeroberfläche"""
         main_frame = ttk.Frame(self.dialog, padding="10")
         main_frame.pack(fill=tk.BOTH, expand=True)
 
-        ttk.Label(main_frame, text="Diese Metadaten werden auf ALLE Ordner angewendet:",
+        ttk.Label(main_frame, text=self.t('batch_metadata_info'),
                  font=('TkDefaultFont', 10, 'bold')).pack(anchor=tk.W, pady=(0, 10))
 
-        ttk.Label(main_frame, text="Leere Felder werden übersprungen (nicht überschrieben).",
+        ttk.Label(main_frame, text=self.t('batch_metadata_hint'),
                  font=('TkDefaultFont', 9), foreground='gray').pack(anchor=tk.W, pady=(0, 10))
 
         # Metadaten-Felder
         self.metadata_entries = {}
         metadata_fields = [
-            ('artist', 'Autor:'),
-            ('date', 'Jahr:'),
-            ('genre', 'Genre:'),
+            ('artist', self.t('artist')),
+            ('date', self.t('year')),
+            ('genre', self.t('genre')),
         ]
 
         fields_frame = ttk.Frame(main_frame)
@@ -344,16 +667,15 @@ class BatchMetadataDialog:
         # Info
         info_frame = ttk.Frame(main_frame)
         info_frame.pack(fill=tk.X, pady=(10, 0))
-        info_text = "Hinweis: Der Titel und Albumname werden NICHT überschrieben,\nda diese für jeden Ordner individuell sein sollten."
-        ttk.Label(info_frame, text=info_text, font=('TkDefaultFont', 8),
+        ttk.Label(info_frame, text=self.t('batch_metadata_note'), font=('TkDefaultFont', 8),
                  foreground='gray', justify=tk.LEFT).pack(anchor=tk.W)
 
         # Buttons
         button_frame = ttk.Frame(main_frame)
         button_frame.pack(fill=tk.X, pady=(20, 0))
 
-        ttk.Button(button_frame, text="Abbrechen", command=self.cancel).pack(side=tk.RIGHT, padx=5)
-        ttk.Button(button_frame, text="Anwenden", command=self.apply).pack(side=tk.RIGHT, padx=5)
+        ttk.Button(button_frame, text=self.t('cancel'), command=self.cancel).pack(side=tk.RIGHT, padx=5)
+        ttk.Button(button_frame, text=self.t('apply'), command=self.apply).pack(side=tk.RIGHT, padx=5)
 
     def apply(self):
         """Wendet die Metadaten an"""
@@ -364,7 +686,7 @@ class BatchMetadataDialog:
                 self.metadata[key] = value
 
         if not self.metadata:
-            messagebox.showwarning("Keine Daten", "Bitte mindestens ein Feld ausfüllen!")
+            messagebox.showwarning(self.t('no_data'), self.t('fill_one_field'))
             return
 
         self.result = True
@@ -381,16 +703,83 @@ class M4BCreatorGUI:
 
     def __init__(self, root):
         self.root = root
+        self.current_language = 'de'  # Standard: Deutsch
         self.root.title("M4B Creator - Batch-Verarbeitung")
         self.root.geometry("1400x800")
 
         self.folder_data_list: List[FolderData] = []
         self.selected_folder_index: Optional[int] = None
 
+        # UI-Referenzen für Sprachumschaltung
+        self.ui_elements = {}
+
         self.setup_ui()
+
+    def t(self, key: str, **kwargs) -> str:
+        """Übersetzt einen Schlüssel in die aktuelle Sprache"""
+        text = TRANSLATIONS[self.current_language].get(key, key)
+        if kwargs:
+            return text.format(**kwargs)
+        return text
+
+    def switch_language(self):
+        """Wechselt zwischen Deutsch und Englisch"""
+        self.current_language = 'en' if self.current_language == 'de' else 'de'
+        self.update_ui_language()
+
+    def _ask_yes_no(self, title, message):
+        """Zeigt einen Ja/Nein-Dialog mit übersetzten Buttons"""
+        dialog = tk.Toplevel(self.root)
+        dialog.title(title)
+        dialog.transient(self.root)
+        dialog.grab_set()
+
+        result = [None]  # Use list to store result from button callbacks
+
+        # Nachricht
+        msg_frame = ttk.Frame(dialog, padding="20")
+        msg_frame.pack(fill=tk.BOTH, expand=True)
+        ttk.Label(msg_frame, text=message, wraplength=400, justify=tk.LEFT).pack()
+
+        # Buttons
+        btn_frame = ttk.Frame(dialog, padding="10")
+        btn_frame.pack(fill=tk.X)
+
+        def on_yes():
+            result[0] = True
+            dialog.destroy()
+
+        def on_no():
+            result[0] = False
+            dialog.destroy()
+
+        ttk.Button(btn_frame, text=self.t('no'), command=on_no).pack(side=tk.RIGHT, padx=5)
+        ttk.Button(btn_frame, text=self.t('yes'), command=on_yes).pack(side=tk.RIGHT, padx=5)
+
+        # Zentriere Dialog
+        dialog.update_idletasks()
+        x = self.root.winfo_x() + (self.root.winfo_width() // 2) - (dialog.winfo_width() // 2)
+        y = self.root.winfo_y() + (self.root.winfo_height() // 2) - (dialog.winfo_height() // 2)
+        dialog.geometry(f"+{x}+{y}")
+
+        # Warte auf Antwort
+        self.root.wait_window(dialog)
+        return result[0] if result[0] is not None else False
 
     def setup_ui(self):
         """Erstellt die Benutzeroberfläche"""
+
+        # Sprach-Button oben rechts
+        lang_frame = ttk.Frame(self.root)
+        lang_frame.pack(fill=tk.X, padx=5, pady=(5, 0))
+
+        self.lang_button = ttk.Button(lang_frame, text=self.t('switch_language'),
+                                      command=self.switch_language)
+        self.lang_button.pack(side=tk.RIGHT)
+
+        self.lang_label = ttk.Label(lang_frame, text=self.t('language'),
+                 font=('TkDefaultFont', 9))
+        self.lang_label.pack(side=tk.RIGHT, padx=5)
 
         # Hauptframe mit PanedWindow für linke/rechte Seite
         main_paned = ttk.PanedWindow(self.root, orient=tk.HORIZONTAL)
@@ -401,18 +790,27 @@ class M4BCreatorGUI:
         main_paned.add(left_frame, weight=1)
 
         # Ordner-Liste
-        folders_frame = ttk.LabelFrame(left_frame, text="Ordner-Liste (Drag & Drop unterstützt)", padding="5")
-        folders_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 5))
+        self.folders_frame = ttk.LabelFrame(left_frame, text=self.t('folder_list_title'), padding="5")
+        self.folders_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 5))
+        self.ui_elements['folder_list_title'] = self.folders_frame
 
-        btn_frame = ttk.Frame(folders_frame)
+        btn_frame = ttk.Frame(self.folders_frame)
         btn_frame.pack(fill=tk.X, pady=(0, 5))
 
-        ttk.Button(btn_frame, text="+ Ordner", command=self.add_batch_folder).pack(side=tk.LEFT, padx=2)
-        ttk.Button(btn_frame, text="- Entfernen", command=self.remove_folder).pack(side=tk.LEFT, padx=2)
-        ttk.Button(btn_frame, text="Liste leeren", command=self.clear_batch_folders).pack(side=tk.LEFT, padx=2)
+        self.add_folder_btn = ttk.Button(btn_frame, text=self.t('add_folder'), command=self.add_batch_folder)
+        self.add_folder_btn.pack(side=tk.LEFT, padx=2)
+        self.ui_elements['add_folder'] = self.add_folder_btn
+
+        self.remove_folder_btn = ttk.Button(btn_frame, text=self.t('remove_folder'), command=self.remove_folder)
+        self.remove_folder_btn.pack(side=tk.LEFT, padx=2)
+        self.ui_elements['remove_folder'] = self.remove_folder_btn
+
+        self.clear_list_btn = ttk.Button(btn_frame, text=self.t('clear_list'), command=self.clear_batch_folders)
+        self.clear_list_btn.pack(side=tk.LEFT, padx=2)
+        self.ui_elements['clear_list'] = self.clear_list_btn
 
         # Listbox mit Scrollbar
-        list_frame = ttk.Frame(folders_frame)
+        list_frame = ttk.Frame(self.folders_frame)
         list_frame.pack(fill=tk.BOTH, expand=True)
 
         scrollbar = ttk.Scrollbar(list_frame)
@@ -427,34 +825,55 @@ class M4BCreatorGUI:
         self.setup_drag_and_drop()
 
         # Batch-Metadaten
-        batch_meta_frame = ttk.LabelFrame(left_frame, text="Batch-Aktionen", padding="5")
-        batch_meta_frame.pack(fill=tk.X, pady=(0, 5))
+        self.batch_meta_frame = ttk.LabelFrame(left_frame, text=self.t('batch_actions'), padding="5")
+        self.batch_meta_frame.pack(fill=tk.X, pady=(0, 5))
+        self.ui_elements['batch_actions'] = self.batch_meta_frame
 
-        ttk.Button(batch_meta_frame, text="Metadaten auf alle anwenden",
-                  command=self.apply_batch_metadata).pack(fill=tk.X, pady=2)
+        self.apply_metadata_btn = ttk.Button(self.batch_meta_frame, text=self.t('apply_metadata_all'),
+                  command=self.apply_batch_metadata)
+        self.apply_metadata_btn.pack(fill=tk.X, pady=2)
+        self.ui_elements['apply_metadata_all'] = self.apply_metadata_btn
 
         # Einstellungen
-        settings_frame = ttk.LabelFrame(left_frame, text="Einstellungen", padding="5")
-        settings_frame.pack(fill=tk.X, pady=(0, 5))
+        self.settings_frame = ttk.LabelFrame(left_frame, text=self.t('settings'), padding="5")
+        self.settings_frame.pack(fill=tk.X, pady=(0, 5))
+        self.ui_elements['settings'] = self.settings_frame
 
-        ttk.Label(settings_frame, text="Qualität:").grid(row=0, column=0, sticky=tk.W, padx=5, pady=2)
+        self.quality_label = ttk.Label(self.settings_frame, text=self.t('quality'))
+        self.quality_label.grid(row=0, column=0, sticky=tk.W, padx=5, pady=2)
+        self.ui_elements['quality'] = self.quality_label
+
         self.copy_audio_var = tk.BooleanVar(value=True)
-        ttk.Radiobutton(settings_frame, text="Original",
-                       variable=self.copy_audio_var, value=True).grid(row=0, column=1, sticky=tk.W)
-        ttk.Radiobutton(settings_frame, text="Neu (AAC 128k)",
-                       variable=self.copy_audio_var, value=False).grid(row=1, column=1, sticky=tk.W)
+        self.original_radio = ttk.Radiobutton(self.settings_frame, text=self.t('original'),
+                       variable=self.copy_audio_var, value=True)
+        self.original_radio.grid(row=0, column=1, sticky=tk.W)
+        self.ui_elements['original'] = self.original_radio
 
-        ttk.Label(settings_frame, text="Unterordner:").grid(row=2, column=0, sticky=tk.W, padx=5, pady=2)
+        self.new_aac_radio = ttk.Radiobutton(self.settings_frame, text=self.t('new_aac'),
+                       variable=self.copy_audio_var, value=False)
+        self.new_aac_radio.grid(row=1, column=1, sticky=tk.W)
+        self.ui_elements['new_aac'] = self.new_aac_radio
+
+        self.subfolders_label = ttk.Label(self.settings_frame, text=self.t('subfolders'))
+        self.subfolders_label.grid(row=2, column=0, sticky=tk.W, padx=5, pady=2)
+        self.ui_elements['subfolders'] = self.subfolders_label
+
         self.recursive_var = tk.BooleanVar(value=False)
-        ttk.Checkbutton(settings_frame, text="Rekursiv",
-                       variable=self.recursive_var).grid(row=2, column=1, sticky=tk.W)
+        self.recursive_check = ttk.Checkbutton(self.settings_frame, text=self.t('recursive_checkbox'),
+                       variable=self.recursive_var)
+        self.recursive_check.grid(row=2, column=1, sticky=tk.W)
+        self.ui_elements['recursive_checkbox'] = self.recursive_check
 
         # Ausgabe
-        output_frame = ttk.LabelFrame(left_frame, text="Ausgabe", padding="5")
-        output_frame.pack(fill=tk.X, pady=(0, 5))
+        self.output_frame = ttk.LabelFrame(left_frame, text=self.t('output'), padding="5")
+        self.output_frame.pack(fill=tk.X, pady=(0, 5))
+        self.ui_elements['output'] = self.output_frame
 
-        ttk.Label(output_frame, text="Ausgabeordner:").pack(anchor=tk.W, padx=5)
-        output_entry_frame = ttk.Frame(output_frame)
+        self.output_folder_label = ttk.Label(self.output_frame, text=self.t('output_folder'))
+        self.output_folder_label.pack(anchor=tk.W, padx=5)
+        self.ui_elements['output_folder'] = self.output_folder_label
+
+        output_entry_frame = ttk.Frame(self.output_frame)
         output_entry_frame.pack(fill=tk.X, padx=5, pady=2)
 
         self.output_dir_entry = ttk.Entry(output_entry_frame)
@@ -462,18 +881,23 @@ class M4BCreatorGUI:
         ttk.Button(output_entry_frame, text="...", width=3,
                   command=self.browse_output_dir).pack(side=tk.RIGHT)
 
-        ttk.Label(output_frame, text="Leer = Quellordner", font=('TkDefaultFont', 8),
-                 foreground='gray').pack(anchor=tk.W, padx=5)
+        self.empty_source_label = ttk.Label(self.output_frame, text=self.t('empty_source_folder'),
+                 font=('TkDefaultFont', 8), foreground='gray')
+        self.empty_source_label.pack(anchor=tk.W, padx=5)
+        self.ui_elements['empty_source_folder'] = self.empty_source_label
 
         # Start-Button
-        ttk.Button(left_frame, text="⚡ Batch-Verarbeitung starten",
-                  command=self.create_batch).pack(fill=tk.X, pady=5)
+        self.start_batch_btn = ttk.Button(left_frame, text=self.t('start_batch'),
+                  command=self.create_batch)
+        self.start_batch_btn.pack(fill=tk.X, pady=5)
+        self.ui_elements['start_batch'] = self.start_batch_btn
 
         # Status
-        status_frame = ttk.LabelFrame(left_frame, text="Status", padding="5")
-        status_frame.pack(fill=tk.BOTH, expand=True)
+        self.status_frame = ttk.LabelFrame(left_frame, text=self.t('status'), padding="5")
+        self.status_frame.pack(fill=tk.BOTH, expand=True)
+        self.ui_elements['status'] = self.status_frame
 
-        self.status_text = scrolledtext.ScrolledText(status_frame, height=8, state='disabled')
+        self.status_text = scrolledtext.ScrolledText(self.status_frame, height=8, state='disabled')
         self.status_text.pack(fill=tk.BOTH, expand=True)
 
         # RECHTE SEITE: Detail-Ansicht
@@ -486,23 +910,23 @@ class M4BCreatorGUI:
 
         # Tab 1: Kapitel
         self.chapters_tab = ttk.Frame(self.detail_notebook, padding="10")
-        self.detail_notebook.add(self.chapters_tab, text="Kapitel-Reihenfolge")
+        self.detail_notebook.add(self.chapters_tab, text=self.t('tab_chapters'))
 
-        ttk.Label(self.chapters_tab, text="Keine Auswahl",
+        ttk.Label(self.chapters_tab, text=self.t('no_selection'),
                  font=('TkDefaultFont', 12)).pack(pady=50)
 
         # Tab 2: Metadaten
         self.metadata_tab = ttk.Frame(self.detail_notebook, padding="10")
-        self.detail_notebook.add(self.metadata_tab, text="Metadaten")
+        self.detail_notebook.add(self.metadata_tab, text=self.t('tab_metadata'))
 
-        ttk.Label(self.metadata_tab, text="Keine Auswahl",
+        ttk.Label(self.metadata_tab, text=self.t('no_selection'),
                  font=('TkDefaultFont', 12)).pack(pady=50)
 
         # Tab 3: Übersicht
         self.overview_tab = ttk.Frame(self.detail_notebook, padding="10")
-        self.detail_notebook.add(self.overview_tab, text="Übersicht")
+        self.detail_notebook.add(self.overview_tab, text=self.t('tab_overview'))
 
-        ttk.Label(self.overview_tab, text="Keine Auswahl",
+        ttk.Label(self.overview_tab, text=self.t('no_selection'),
                  font=('TkDefaultFont', 12)).pack(pady=50)
 
     def add_batch_folder(self):
@@ -514,22 +938,21 @@ class M4BCreatorGUI:
         folders = []
 
         # Windows: Nutze askdirectory mehrfach mit Hinweis
-        result = messagebox.askyesno(
-            "Mehrere Ordner hinzufügen?",
-            "Möchten Sie mehrere Ordner gleichzeitig auswählen?\n\n"
-            "Ja = Mehrere Ordner nacheinander auswählen (mit Abbrechen beenden)\n"
-            "Nein = Nur einen Ordner auswählen"
+        # Verwende einen eigenen Dialog mit übersetzten Buttons
+        result = self._ask_yes_no(
+            self.t('add_multiple_folders'),
+            self.t('add_multiple_folders_msg')
         )
 
         if result:  # Mehrere Ordner
             while True:
-                folder = filedialog.askdirectory(title="Ordner auswählen (Abbrechen zum Beenden)")
+                folder = filedialog.askdirectory(title=self.t('select_folder'))
                 if not folder:
                     break
                 if folder not in folders:
                     folders.append(folder)
         else:  # Nur ein Ordner
-            folder = filedialog.askdirectory(title="Ordner mit Audiodateien auswählen")
+            folder = filedialog.askdirectory(title=self.t('select_audio_folder'))
             if folder:
                 folders.append(folder)
 
@@ -543,7 +966,7 @@ class M4BCreatorGUI:
             folder_data = FolderData(folder, recursive)
 
             if not folder_data.audio_files:
-                messagebox.showwarning("Keine Dateien", f"Keine Audiodateien in {folder} gefunden!")
+                messagebox.showwarning(self.t('no_files_found'), self.t('no_audio_files', folder=folder))
                 continue  # Überspringe diesen Ordner
 
             self.folder_data_list.append(folder_data)
@@ -552,19 +975,19 @@ class M4BCreatorGUI:
         if added_count > 0:
             self.update_folder_list()
             if added_count > 1:
-                messagebox.showinfo("Erfolg", f"{added_count} Ordner hinzugefügt!")
+                messagebox.showinfo(self.t('success'), self.t('folders_added', count=added_count))
             else:
-                messagebox.showinfo("Erfolg", "Ordner hinzugefügt!")
+                messagebox.showinfo(self.t('success'), self.t('folder_added'))
 
     def remove_folder(self):
         """Entfernt den ausgewählten Ordner"""
         if self.selected_folder_index is None:
-            messagebox.showinfo("Keine Auswahl", "Bitte einen Ordner auswählen!")
+            messagebox.showinfo(self.t('no_selection'), self.t('no_selection'))
             return
 
         folder_name = self.folder_data_list[self.selected_folder_index].folder_name
 
-        if messagebox.askyesno("Bestätigen", f"'{folder_name}' aus der Liste entfernen?"):
+        if self._ask_yes_no(self.t('confirm'), self.t('remove_folder_confirm', name=folder_name)):
             del self.folder_data_list[self.selected_folder_index]
             self.selected_folder_index = None
             self.update_folder_list()
@@ -572,7 +995,7 @@ class M4BCreatorGUI:
 
     def clear_batch_folders(self):
         """Leert die Ordnerliste"""
-        if self.folder_data_list and messagebox.askyesno("Bestätigen", "Alle Ordner entfernen?"):
+        if self.folder_data_list and self._ask_yes_no(self.t('confirm'), self.t('clear_all_confirm')):
             self.folder_data_list = []
             self.selected_folder_index = None
             self.update_folder_list()
@@ -629,9 +1052,9 @@ class M4BCreatorGUI:
         if added_count > 0:
             self.update_folder_list()
             if added_count > 1:
-                messagebox.showinfo("Erfolg", f"{added_count} Ordner per Drag & Drop hinzugefügt!")
+                messagebox.showinfo(self.t('success'), self.t('folders_dropped', count=added_count))
             else:
-                messagebox.showinfo("Erfolg", "Ordner per Drag & Drop hinzugefügt!")
+                messagebox.showinfo(self.t('success'), self.t('folder_dropped'))
 
     def on_drop_windnd(self, files):
         """Verarbeitet Drag & Drop Events (windnd)"""
@@ -658,16 +1081,16 @@ class M4BCreatorGUI:
         if added_count > 0:
             self.update_folder_list()
             if added_count > 1:
-                messagebox.showinfo("Erfolg", f"{added_count} Ordner per Drag & Drop hinzugefügt!")
+                messagebox.showinfo(self.t('success'), self.t('folders_dropped', count=added_count))
             else:
-                messagebox.showinfo("Erfolg", "Ordner per Drag & Drop hinzugefügt!")
+                messagebox.showinfo(self.t('success'), self.t('folder_dropped'))
 
     def update_folder_list(self):
         """Aktualisiert die Ordnerliste"""
         self.folder_listbox.delete(0, tk.END)
         for folder_data in self.folder_data_list:
             file_count = len(folder_data.audio_files)
-            display = f"{folder_data.output_name} ({file_count} Dateien)"
+            display = f"{folder_data.output_name} ({self.t('files_count', count=file_count)})"
             self.folder_listbox.insert(tk.END, display)
 
     def on_folder_select(self, event):
@@ -688,16 +1111,16 @@ class M4BCreatorGUI:
         for widget in self.chapters_tab.winfo_children():
             widget.destroy()
 
-        ttk.Label(self.chapters_tab, text=f"Kapitel: {folder_data.output_name}",
+        ttk.Label(self.chapters_tab, text=self.t('chapters_title', name=folder_data.output_name),
                  font=('TkDefaultFont', 11, 'bold')).pack(anchor=tk.W, pady=(0, 10))
 
         # Buttons
         btn_frame = ttk.Frame(self.chapters_tab)
         btn_frame.pack(fill=tk.X, pady=(0, 5))
 
-        ttk.Button(btn_frame, text="↑ Nach oben", command=self.move_chapter_up).pack(side=tk.LEFT, padx=2)
-        ttk.Button(btn_frame, text="↓ Nach unten", command=self.move_chapter_down).pack(side=tk.LEFT, padx=2)
-        ttk.Button(btn_frame, text="🔄 Aktualisieren", command=self.show_folder_details).pack(side=tk.LEFT, padx=2)
+        ttk.Button(btn_frame, text=self.t('move_up'), command=self.move_chapter_up).pack(side=tk.LEFT, padx=2)
+        ttk.Button(btn_frame, text=self.t('move_down'), command=self.move_chapter_down).pack(side=tk.LEFT, padx=2)
+        ttk.Button(btn_frame, text=self.t('refresh'), command=self.show_folder_details).pack(side=tk.LEFT, padx=2)
 
         # Kapitel-Liste
         list_frame = ttk.Frame(self.chapters_tab)
@@ -720,7 +1143,7 @@ class M4BCreatorGUI:
         for widget in self.metadata_tab.winfo_children():
             widget.destroy()
 
-        ttk.Label(self.metadata_tab, text=f"Metadaten: {folder_data.output_name}",
+        ttk.Label(self.metadata_tab, text=self.t('metadata_title', name=folder_data.output_name),
                  font=('TkDefaultFont', 11, 'bold')).pack(anchor=tk.W, pady=(0, 10))
 
         # Hauptcontainer mit zwei Spalten: Links Artwork, Rechts Metadaten
@@ -728,11 +1151,11 @@ class M4BCreatorGUI:
         main_container.pack(fill=tk.BOTH, expand=True)
 
         # LINKE SPALTE: Artwork
-        artwork_frame = ttk.LabelFrame(main_container, text="Cover-Artwork", padding="10")
+        artwork_frame = ttk.LabelFrame(main_container, text=self.t('cover_artwork'), padding="10")
         artwork_frame.pack(side=tk.LEFT, fill=tk.Y, padx=(0, 10))
 
         # Artwork-Anzeige
-        self.artwork_label = ttk.Label(artwork_frame, text="Kein Cover", relief=tk.RIDGE)
+        self.artwork_label = ttk.Label(artwork_frame, text=self.t('no_cover'), relief=tk.RIDGE)
         self.artwork_label.pack(pady=5)
 
         # Lade und zeige Artwork
@@ -742,11 +1165,11 @@ class M4BCreatorGUI:
         artwork_btn_frame = ttk.Frame(artwork_frame)
         artwork_btn_frame.pack(fill=tk.X, pady=5)
 
-        ttk.Button(artwork_btn_frame, text="Cover ändern",
+        ttk.Button(artwork_btn_frame, text=self.t('change_cover'),
                   command=self.change_artwork).pack(fill=tk.X, pady=2)
-        ttk.Button(artwork_btn_frame, text="Cover extrahieren",
+        ttk.Button(artwork_btn_frame, text=self.t('extract_cover'),
                   command=self.extract_artwork).pack(fill=tk.X, pady=2)
-        ttk.Button(artwork_btn_frame, text="Cover entfernen",
+        ttk.Button(artwork_btn_frame, text=self.t('remove_cover'),
                   command=self.remove_artwork).pack(fill=tk.X, pady=2)
 
         # RECHTE SPALTE: Metadaten
@@ -756,7 +1179,7 @@ class M4BCreatorGUI:
         # Ausgabename
         name_frame = ttk.Frame(metadata_container)
         name_frame.pack(fill=tk.X, pady=5)
-        ttk.Label(name_frame, text="Ausgabename:", width=15).pack(side=tk.LEFT, padx=(0, 5))
+        ttk.Label(name_frame, text=self.t('output_name'), width=15).pack(side=tk.LEFT, padx=(0, 5))
         self.output_name_entry = ttk.Entry(name_frame)
         self.output_name_entry.insert(0, folder_data.output_name)
         self.output_name_entry.pack(side=tk.LEFT, fill=tk.X, expand=True)
@@ -764,11 +1187,11 @@ class M4BCreatorGUI:
         # Metadaten
         self.metadata_entries = {}
         metadata_fields = [
-            ('title', 'Titel:'),
-            ('artist', 'Autor:'),
-            ('album', 'Album/Buch:'),
-            ('date', 'Jahr:'),
-            ('genre', 'Genre:'),
+            ('title', self.t('title')),
+            ('artist', self.t('artist')),
+            ('album', self.t('album')),
+            ('date', self.t('year')),
+            ('genre', self.t('genre')),
         ]
 
         for key, label in metadata_fields:
@@ -781,27 +1204,27 @@ class M4BCreatorGUI:
             self.metadata_entries[key] = entry
 
         # Speichern-Button
-        ttk.Button(metadata_container, text="💾 Änderungen speichern",
+        ttk.Button(metadata_container, text=self.t('save_changes'),
                   command=self.save_folder_metadata).pack(pady=20)
 
         # Tab 3: Übersicht aufbauen
         for widget in self.overview_tab.winfo_children():
             widget.destroy()
 
-        ttk.Label(self.overview_tab, text=f"Übersicht: {folder_data.output_name}",
+        ttk.Label(self.overview_tab, text=self.t('overview_title', name=folder_data.output_name),
                  font=('TkDefaultFont', 11, 'bold')).pack(anchor=tk.W, pady=(0, 10))
 
         info_text_widget = tk.Text(self.overview_tab, wrap=tk.WORD, state='disabled')
         info_text_widget.pack(fill=tk.BOTH, expand=True)
 
         info_lines = [
-            f"Ordnername: {folder_data.folder_name}",
-            f"Pfad: {folder_data.folder_path}",
-            f"Ausgabename: {folder_data.output_name}.m4b",
-            f"Anzahl Dateien: {len(folder_data.audio_files)}",
-            f"Rekursiv: {'Ja' if folder_data.recursive else 'Nein'}",
+            f"{self.t('folder_name')}: {folder_data.folder_name}",
+            f"{self.t('path')}: {folder_data.folder_path}",
+            f"{self.t('output_filename')}: {folder_data.output_name}.m4b",
+            f"{self.t('file_count')}: {len(folder_data.audio_files)}",
+            f"{self.t('recursive')}: {self.t('recursive_yes') if folder_data.recursive else self.t('recursive_no')}",
             "",
-            "Audiodateien:",
+            f"{self.t('audio_files')}:",
             "-" * 80
         ]
 
@@ -812,7 +1235,7 @@ class M4BCreatorGUI:
             total_duration += af.duration
 
         info_lines.append("-" * 80)
-        info_lines.append(f"Gesamtdauer: {total_duration / 3600:.2f} Stunden ({total_duration / 60:.1f} Minuten)")
+        info_lines.append(f"{self.t('total_duration')}: {total_duration / 3600:.2f} {self.t('hours')} ({total_duration / 60:.1f} {self.t('minutes')})")
 
         info_text_widget.config(state='normal')
         info_text_widget.insert('1.0', '\n'.join(info_lines))
@@ -822,15 +1245,15 @@ class M4BCreatorGUI:
         """Leert die Detail-Ansicht"""
         for widget in self.chapters_tab.winfo_children():
             widget.destroy()
-        ttk.Label(self.chapters_tab, text="Keine Auswahl", font=('TkDefaultFont', 12)).pack(pady=50)
+        ttk.Label(self.chapters_tab, text=self.t('no_selection'), font=('TkDefaultFont', 12)).pack(pady=50)
 
         for widget in self.metadata_tab.winfo_children():
             widget.destroy()
-        ttk.Label(self.metadata_tab, text="Keine Auswahl", font=('TkDefaultFont', 12)).pack(pady=50)
+        ttk.Label(self.metadata_tab, text=self.t('no_selection'), font=('TkDefaultFont', 12)).pack(pady=50)
 
         for widget in self.overview_tab.winfo_children():
             widget.destroy()
-        ttk.Label(self.overview_tab, text="Keine Auswahl", font=('TkDefaultFont', 12)).pack(pady=50)
+        ttk.Label(self.overview_tab, text=self.t('no_selection'), font=('TkDefaultFont', 12)).pack(pady=50)
 
     def move_chapter_up(self):
         """Verschiebt Kapitel nach oben"""
@@ -916,17 +1339,17 @@ class M4BCreatorGUI:
         folder_data = self.folder_data_list[self.selected_folder_index]
 
         file_path = filedialog.askopenfilename(
-            title="Cover-Bild auswählen",
+            title=self.t('select_cover'),
             filetypes=[
-                ("Bild-Dateien", "*.jpg *.jpeg *.png *.bmp *.gif"),
-                ("Alle Dateien", "*.*")
+                (self.t('image_files'), "*.jpg *.jpeg *.png *.bmp *.gif"),
+                (self.t('all_files'), "*.*")
             ]
         )
 
         if file_path:
             folder_data.custom_artwork_path = file_path
             self.load_and_display_artwork(folder_data)
-            messagebox.showinfo("Erfolg", "Cover wurde geändert!")
+            messagebox.showinfo(self.t('success'), self.t('cover_changed'))
 
     def extract_artwork(self):
         """Extrahiert das Cover und speichert es"""
@@ -959,27 +1382,27 @@ class M4BCreatorGUI:
                     break
 
         if not source_path:
-            messagebox.showwarning("Kein Cover", "Kein Cover zum Extrahieren gefunden!")
+            messagebox.showwarning(self.t('no_cover_found'), self.t('no_cover_to_extract'))
             return
 
         # Speichern-Dialog
         save_path = filedialog.asksaveasfilename(
-            title="Cover speichern unter",
+            title=self.t('save_cover'),
             defaultextension=".jpg",
             initialfile=f"{folder_data.output_name}_cover.jpg",
             filetypes=[
                 ("JPEG", "*.jpg"),
                 ("PNG", "*.png"),
-                ("Alle Dateien", "*.*")
+                (self.t('all_files'), "*.*")
             ]
         )
 
         if save_path:
             try:
                 shutil.copy2(source_path, save_path)
-                messagebox.showinfo("Erfolg", f"Cover gespeichert:\n{save_path}")
+                messagebox.showinfo(self.t('success'), self.t('cover_saved', path=save_path))
             except Exception as e:
-                messagebox.showerror("Fehler", f"Fehler beim Speichern:\n{str(e)}")
+                messagebox.showerror(self.t('error'), f"{self.t('error')}: {str(e)}")
 
             # Aufräumen
             if source_path.endswith('.temp_extract_cover.jpg'):
@@ -996,12 +1419,12 @@ class M4BCreatorGUI:
         folder_data = self.folder_data_list[self.selected_folder_index]
 
         if folder_data.custom_artwork_path:
-            if messagebox.askyesno("Bestätigen", "Benutzerdefiniertes Cover entfernen?"):
+            if self._ask_yes_no(self.t('confirm'), self.t('remove_cover') + "?"):
                 folder_data.custom_artwork_path = None
                 self.load_and_display_artwork(folder_data)
-                messagebox.showinfo("Erfolg", "Cover wurde entfernt!")
+                messagebox.showinfo(self.t('success'), self.t('cover_removed'))
         else:
-            messagebox.showinfo("Kein Cover", "Kein benutzerdefiniertes Cover vorhanden!")
+            messagebox.showinfo(self.t('no_cover_found'), self.t('no_custom_cover'))
 
     def save_folder_metadata(self):
         """Speichert die Metadaten des aktuellen Ordners"""
@@ -1020,15 +1443,15 @@ class M4BCreatorGUI:
             folder_data.output_name = folder_data.folder_name
 
         self.update_folder_list()
-        messagebox.showinfo("Gespeichert", "Änderungen wurden gespeichert!")
+        messagebox.showinfo(self.t('saved'), self.t('changes_saved'))
 
     def apply_batch_metadata(self):
         """Öffnet Dialog zum Anwenden von Metadaten auf alle Ordner"""
         if not self.folder_data_list:
-            messagebox.showinfo("Keine Ordner", "Bitte erst Ordner hinzufügen!")
+            messagebox.showinfo(self.t('no_folders'), self.t('add_folders_first'))
             return
 
-        dialog = BatchMetadataDialog(self.root)
+        dialog = BatchMetadataDialog(self.root, self.current_language)
         self.root.wait_window(dialog.dialog)
 
         if dialog.result and dialog.metadata:
@@ -1038,7 +1461,7 @@ class M4BCreatorGUI:
                     folder_data.metadata[key] = value
                 count += 1
 
-            messagebox.showinfo("Erfolg", f"Metadaten auf {count} Ordner angewendet!")
+            messagebox.showinfo(self.t('success'), self.t('metadata_applied', count=count))
 
             # Aktualisiere Ansicht falls ein Ordner ausgewählt ist
             if self.selected_folder_index is not None:
@@ -1046,7 +1469,7 @@ class M4BCreatorGUI:
 
     def browse_output_dir(self):
         """Öffnet Dialog zur Auswahl des Ausgabeordners"""
-        folder = filedialog.askdirectory(title="Ausgabeordner wählen")
+        folder = filedialog.askdirectory(title=self.t('select_output_folder'))
         if folder:
             self.output_dir_entry.delete(0, tk.END)
             self.output_dir_entry.insert(0, folder)
@@ -1062,7 +1485,7 @@ class M4BCreatorGUI:
     def create_batch(self):
         """Startet die Batch-Verarbeitung"""
         if not self.folder_data_list:
-            messagebox.showerror("Fehler", "Bitte mindestens einen Ordner hinzufügen!")
+            messagebox.showerror(self.t('error'), self.t('add_folder_first'))
             return
 
         output_dir = self.output_dir_entry.get().strip()
@@ -1127,14 +1550,59 @@ class M4BCreatorGUI:
             self.log_status(f"Fehlgeschlagen: {failed}")
 
             if failed == 0:
-                self.root.after(0, lambda: messagebox.showinfo("Erfolg",
-                    f"Alle {successful} M4B-Dateien wurden erfolgreich erstellt!"))
+                self.root.after(0, lambda: messagebox.showinfo(self.t('success'),
+                    self.t('batch_complete', count=successful)))
             else:
-                self.root.after(0, lambda: messagebox.showwarning("Teilweise erfolgreich",
-                    f"Erfolgreich: {successful}\nFehlgeschlagen: {failed}\n\nSiehe Status-Log für Details."))
+                self.root.after(0, lambda: messagebox.showwarning(self.t('partial_success'),
+                    self.t('partial_success_msg', success=successful, failed=failed)))
 
         thread = threading.Thread(target=run_batch, daemon=True)
         thread.start()
+
+    def update_ui_language(self):
+        """Aktualisiert die Sprache aller UI-Elemente"""
+        # Fenstertitel
+        self.root.title(self.t('window_title'))
+
+        # Sprach-Button und Label
+        self.lang_button.config(text=self.t('switch_language'))
+        self.lang_label.config(text=self.t('language'))
+
+        # Aktualisiere alle gespeicherten UI-Elemente
+        for key, widget in self.ui_elements.items():
+            if isinstance(widget, dict):
+                for sub_key, sub_widget in widget.items():
+                    self._update_widget_text(sub_widget, sub_key)
+            else:
+                self._update_widget_text(widget, key)
+
+        # Aktualisiere Notebook-Tabs
+        self.detail_notebook.tab(0, text=self.t('tab_chapters'))
+        self.detail_notebook.tab(1, text=self.t('tab_metadata'))
+        self.detail_notebook.tab(2, text=self.t('tab_overview'))
+
+        # Aktualisiere Detail-Ansicht wenn etwas ausgewählt ist
+        if self.selected_folder_index is not None:
+            self.show_folder_details()
+        else:
+            # Aktualisiere "Keine Auswahl" Labels
+            self.clear_detail_view()
+
+        # Aktualisiere Ordnerliste
+        self.update_folder_list()
+
+    def _update_widget_text(self, widget, key):
+        """Hilfsfunktion zum Aktualisieren eines einzelnen Widgets"""
+        try:
+            if isinstance(widget, (ttk.LabelFrame, ttk.Label)):
+                if hasattr(widget, 'cget') and widget.cget('text'):
+                    widget.config(text=self.t(key))
+            elif isinstance(widget, (ttk.Button, tk.Button)):
+                widget.config(text=self.t(key))
+            elif isinstance(widget, (ttk.Radiobutton, ttk.Checkbutton)):
+                widget.config(text=self.t(key))
+        except:
+            pass
 
 
 def main():
