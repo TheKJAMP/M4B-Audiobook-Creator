@@ -106,31 +106,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned Features
-- [ ] Additional language support (French, Spanish, etc.)
-- [ ] Language preference saving between sessions
-- [ ] Custom chapter title editing
-- [ ] Progress bar with percentage
-- [ ] Audio preview/playback
-- [ ] Automatic chapter detection from silence
-- [ ] Batch cover art download
-- [ ] Command-line interface (CLI)
-- [ ] Preset templates
-- [ ] Dark mode theme
-- [ ] Undo/Redo functionality
-- [ ] Drag & Drop for chapter reordering
-- [ ] Portable mode (no installation)
+- [✅] Additional language support (English, German)
+- [❌] Language preference saving between sessions
+- [✅ ] Custom chapter title editing
+- [❌] Progress bar with percentage
+- [❌] Audio preview/playback
+- [❌] Automatic chapter detection from silence
+- [❌] Batch cover art download
+- [❌] Command-line interface (CLI)
+- [❌] Preset templates
+- [✅ ] Dark mode theme
+- [❌] Undo/Redo functionality
+- [❌] Drag & Drop for chapter reordering
+- [❌] Portable mode (no installation)
 
 ### Future Enhancements
-- [ ] Automatic bitrate detection
-- [ ] Variable bitrate (VBR) support
-- [ ] Split large audiobooks
-- [ ] Merge multiple M4B files
-- [ ] Metadata templates
-- [ ] Cover art search integration
-- [ ] Quality presets (Low, Medium, High)
-- [ ] Resume interrupted processing
-- [ ] Duplicate detection
-- [ ] File size calculator
+- [❌] Automatic bitrate detection
+- [❌] Variable bitrate (VBR) support
+- [❌] Split large audiobooks
+- [❌] Merge multiple M4B files
+- [❌] Metadata templates
+- [❌] Cover art search integration
+- [❌] Quality presets (Low, Medium, High)
+- [❌] Resume interrupted processing
+- [❌] Duplicate detection
+- [❌] File size calculator
 
 ---
 
@@ -156,3 +156,4 @@ For more information, see:
 - [README.md](README.md) - User guide
 - [BUILD.md](BUILD.md) - Build instructions
 - [GitHub Releases](https://github.com/yourusername/m4b-creator/releases) - Download releases
+
