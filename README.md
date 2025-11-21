@@ -14,6 +14,7 @@ A user-friendly GUI tool for creating M4B audiobook files with metadata and chap
 - [✅] Dark mode theme
 
 ### Future updates ****
+- [❌] New Desing
 - [❌] Metadata download with TheAudioDB
 - [❌] Command-line interface (CLI)
 - [❌] Preset templates
