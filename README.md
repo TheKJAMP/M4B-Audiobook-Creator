@@ -29,11 +29,9 @@ I don't speak any of these languages and have to rely on translation tools.
 
 ## Screenshots
 Update 1.02
-<img width="300" height="300" alt="grafik" src="https://github.com/user-attachments/assets/21be06f0-a73e-425a-8c40-d10519482dd5" />
-
-
-
-
+<img width="500" height="500" alt="grafik" src="https://github.com/user-attachments/assets/21be06f0-a73e-425a-8c40-d10519482dd5" />
+<img width="500" height="500" alt="grafik" src="https://github.com/user-attachments/assets/9073b845-a3d3-444e-970a-db64f5a2140e" />
+<img width="500" height="500" alt="grafik" src="https://github.com/user-attachments/assets/786a262c-b4f3-4407-bba0-830b0b40d0ff" />
 Old Tool:
 <img width="300" height="300" alt="grafik" src="https://github.com/user-attachments/assets/4fa8a290-405c-4471-914b-b0c2bc94607e" />
 
