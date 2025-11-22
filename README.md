@@ -8,7 +8,7 @@ A user-friendly GUI tool for creating M4B audiobook files with metadata and chap
 
 ### Next contents Update 1.3: 
 
-    Ready: ✅
+Ready: ✅
 Not Ready: ❌
 - [✅] Additional language support (English, German)
 - [✅] Custom chapter title editing
