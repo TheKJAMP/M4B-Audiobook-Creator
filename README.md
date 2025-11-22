@@ -7,8 +7,6 @@ A user-friendly GUI tool for creating M4B audiobook files with metadata and chap
 ![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue.svg)
 
 ![Version](https://img.shields.io/badge/version-1.0.3-blue.svg)
-![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Electron](https://img.shields.io/badge/Electron-25.9.8-47848F.svg)
 
 ### Next contents Update 1.2: 
