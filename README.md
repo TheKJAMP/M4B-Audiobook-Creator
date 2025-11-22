@@ -28,12 +28,18 @@ Not Ready: ❌
 I don't speak any of these languages and have to rely on translation tools. 
 
 ## Screenshots
+Update 1.02
+<img width="300" height="300" alt="grafik" src="https://github.com/user-attachments/assets/21be06f0-a73e-425a-8c40-d10519482dd5" />
+
+
+
+
 Old Tool:
-<img width="1403" height="838" alt="grafik" src="https://github.com/user-attachments/assets/4fa8a290-405c-4471-914b-b0c2bc94607e" />
+<img width="300" height="300" alt="grafik" src="https://github.com/user-attachments/assets/4fa8a290-405c-4471-914b-b0c2bc94607e" />
 
-<img width="893" height="593" alt="grafik" src="https://github.com/user-attachments/assets/fafcbe07-58e3-41f4-af3b-6486c0a097e4" />
+<img width="300" height="300" alt="grafik" src="https://github.com/user-attachments/assets/fafcbe07-58e3-41f4-af3b-6486c0a097e4" />
 
-<img width="902" height="1017" alt="grafik" src="https://github.com/user-attachments/assets/cab5e7e7-fce1-4f6f-a888-c6b1e6981ce7" />
+<img width="300" height="300" alt="grafik" src="https://github.com/user-attachments/assets/cab5e7e7-fce1-4f6f-a888-c6b1e6981ce7" />
 
 
 ## Features
