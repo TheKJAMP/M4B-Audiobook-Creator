@@ -6,7 +6,7 @@ A user-friendly GUI tool for creating M4B audiobook files with metadata and chap
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue.svg)
 
-### Next contents Update 1.3: 
+### Next contents Update 1.2: 
 
 Ready: ✅
 Not Ready: ❌
@@ -18,7 +18,7 @@ Not Ready: ❌
 - [✅] New Desing
 Version is “Ready to use” Minor updates are still being integrated. 
 
-### More Languages Version 1.5: 
+### More Languages Version 1.3: 
 - [❌] French
 - [❌] Spanish
 - [❌] Japanese
