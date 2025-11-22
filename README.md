@@ -18,7 +18,9 @@ Not Ready: ❌
 - [✅] Progress bar with percentage
 - [✅] Dark mode theme
 - [✅] New Desing
+- 
 [Releases](https://github.com/TheKJAMP/M4B-Audiobook-Creator-Generated-by-AI/releases)
+
 ### More Languages Version 1.3: 
 - [❌] French
 - [❌] Spanish
