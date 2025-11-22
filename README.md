@@ -6,6 +6,11 @@ A user-friendly GUI tool for creating M4B audiobook files with metadata and chap
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue.svg)
 
+![Version](https://img.shields.io/badge/version-1.0.3-blue.svg)
+![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Electron](https://img.shields.io/badge/Electron-25.9.8-47848F.svg)
+
 ### Next contents Update 1.2: 
 
 Ready: ✅
@@ -16,7 +21,6 @@ Not Ready: ❌
 - [✅] Progress bar with percentage
 - [✅] Dark mode theme
 - [✅] New Desing
-Version is “Ready to use” Minor updates are still being integrated. 
 
 ### More Languages Version 1.3: 
 - [❌] French
@@ -27,7 +31,7 @@ Version is “Ready to use” Minor updates are still being integrated.
 I don't speak any of these languages and have to rely on translation tools. 
 
 ## Screenshots
-
+Old Tool:
 <img width="1403" height="838" alt="grafik" src="https://github.com/user-attachments/assets/4fa8a290-405c-4471-914b-b0c2bc94607e" />
 
 <img width="893" height="593" alt="grafik" src="https://github.com/user-attachments/assets/fafcbe07-58e3-41f4-af3b-6486c0a097e4" />
@@ -35,286 +39,303 @@ I don't speak any of these languages and have to rely on translation tools.
 <img width="902" height="1017" alt="grafik" src="https://github.com/user-attachments/assets/cab5e7e7-fce1-4f6f-a888-c6b1e6981ce7" />
 
 
-
-
-
-
-
 ## Features
 
-### Core Functionality
-- **Batch Processing** - Process multiple folders simultaneously
-- **Split-Screen GUI** - Left side: Folder list, Right side: Live details
-- **Chapter Management** - Rearrange chapter order with up/down buttons
-- **Metadata Editor** - Full control over all metadata fields
-- **Recursive Folder Support** - Include subfolders in processing
+### 🎯 Core Functionality
+- **Drag & Drop Support** - Simply drag folders from Windows Explorer onto the app
+- **Multi-Folder Processing** - Drop multiple folders at once for batch processing
+- **Live Metadata Preview** - View and edit all metadata fields in real-time
+- **Chapter Management** - Automatically extracts chapter names from file metadata
+- **Cover Art Management** - Automatic cover extraction and display from audio files
+- **Quality Options** - Choose between original quality or AAC re-encoding
 
-### Cover Artwork Management
-- **Cover Preview** - 300x300 pixel thumbnail display
-- **Custom Cover** - Upload your own artwork
-- **Cover Extraction** - Extract and save embedded cover art
-- **Cover Removal** - Remove custom artwork
+### 🎨 Modern UI
+- **Clean Interface** - Beautiful gradient design with glass-morphism effects
+- **Dark Mode** - Easy on the eyes during long processing sessions
+- **Multi-Language** - Supports German and English
+- **Progress Tracking** - Status log with detailed feedback
+- **Responsive Layout** - Optimized for various screen sizes
 
-### Quality Options
-- **Original Quality** - Copy audio streams without re-encoding
-- **AAC Encoding** - Convert to AAC 128k for smaller file sizes
-- **Multiple Input Formats** - MP3, M4A, M4B, AAC, OGG, FLAC, WAV, WMA
-
-### Batch Operations
-- **Batch Metadata** - Apply common metadata to all folders at once
-- **Drag & Drop Support** - Drop folders directly into the application
-- **Multi-Folder Selection** - Add multiple folders in one operation
-
+### 📁 Supported Formats
+- **Input:** MP3, M4A, M4B, AAC, OGG, FLAC, WAV, WMA
+- **Output:** M4B (MPEG-4 Audio Book) with embedded chapters and metadata
 
 
 ## Requirements
 
-- **Python 3.7 or higher**
-- **FFmpeg** - Must be installed and available in system PATH
+### Required Software
+
+1. **FFmpeg** - For audio processing
+2. **FFprobe** - For metadata extraction (included with FFmpeg)
 
 ### FFmpeg Installation
 
-#### Windows
-1. Download from [gyan.dev](https://www.gyan.dev/ffmpeg/builds/)
-2. Extract the archive
-3. Add the `bin` folder to your system PATH
-
-Or use winget:
+#### Option 1: WinGet (Recommended)
 ```bash
 winget install Gyan.FFmpeg
 ```
 
-#### macOS (Not tested:)
-```bash
-brew install ffmpeg
-```
+#### Option 2: Manual Installation
+1. Download FFmpeg from [gyan.dev](https://www.gyan.dev/ffmpeg/builds/)
+2. Extract the archive to a folder (e.g., `C:\ffmpeg`)
+3. Add the `bin` folder to your system PATH:
+   - Open System Properties → Advanced → Environment Variables
+   - Edit the `Path` variable
+   - Add `C:\ffmpeg\bin` (or your installation path)
+   - Click OK and restart any open terminals
 
-#### Linux (Not tested:)
-```bash
-# Debian/Ubuntu
-sudo apt install ffmpeg
-
-# Fedora
-sudo dnf install ffmpeg
-
-# Arch Linux
-sudo pacman -S ffmpeg
-```
-
-### Verify FFmpeg Installation
+#### Verify Installation
 ```bash
 ffmpeg -version
+ffprobe -version
 ```
 
 ## Installation
 
-### Option 1: From Source
+### Option 1: Portable Executable (Recommended)
 
-1. Clone or download this repository
-   ```bash
-   git clone https://github.com/yourusername/m4b-creator.git
-   cd m4b-creator
-   ```
+1. Download the latest `M4B-Creator-v1.0.3-Portable.exe` from the [Releases](https://github.com/TheKJAMP/M4B-Audiobook-Creator-Generated-by-AI/releases) page
+2. Place it anywhere on your computer
+3. Double-click to run (no installation required)
 
-2. Install Python dependencies
-   ```bash
-   pip install -r requirements.txt
-   ```
+**Note:** FFmpeg must still be installed separately (see "Requirements")
 
-3. Run the application
-   ```bash
-   python m4b_creator.py
-   ```
+### Option 2: Build from Source
 
-### Option 2: Standalone Executable (Windows)
-
-1. Download the latest release from the [Releases](https://github.com/TheKJAMP/M4B-Audiobook-Creator-Generated-by-AI/releases) page
-2. Extract the archive
-3. Run `m4b_creator.exe`
-4. **Note:** FFmpeg, python must still be installed separately
+See the [Building from Source](#building-from-source) section below.
 
 ## Usage Guide
 
 ### Quick Start
 
-1. **Launch the application**
+1. **Launch the Application**
+   - Double-click `M4B-Creator-v1.0.3-Portable.exe`
+
+2. **Add Folders**
+   - **Method 1:** Drag & drop folders from Windows Explorer onto the "folders" panel
+   - **Method 2:** Click "Add folder" button and select folders
+   - **Multi-Select:** Hold Ctrl to select multiple folders, or drag multiple folders at once
+
+3. **Review Detected Files**
+   - Click on a folder in the list to view its details
+   - Switch to the "Kapitel" tab to see all audio files
+   - Switch to "Metadaten" tab to see extracted metadata and cover art
+
+4. **Edit Metadata (Optional)**
+   - Select a folder from the list
+   - Click the "Metadaten" tab
+   - Edit Title, Author, Album, Year, Genre
+   - Upload custom cover artwork if desired
+   - Click "Änderungen speichern" to save
+
+5. **Configure Output Settings**
+   - **Output Path:** Click "Output Path" to select where M4B files will be saved
+     - Leave empty to save in the same folder as the source files
+   - **Quality:** Choose between "Original Quality" --> "Recommend" (no re-encoding) or "New (AAC 128k) --> Will be changed later."
+
+6. **Start Processing**
+   - Click "⚡ Start" to begin creating M4B files
+   - Monitor progress in the "Status-Log" panel
+   - Files will be saved with the folder name as the filename (e.g., `FolderName.m4b`)
+
+### Advanced Features
+
+#### Cover Art Management
+- **Automatic Extraction:** Cover art is automatically detected and extracted from audio files
+- **Custom Upload:** Click "Upload" to use your own artwork
+- **Extract & Save:** Click "Extract" to save embedded cover art to a file
+- **Preview:** 300x300 pixel thumbnail preview in the Metadata tab
+
+#### Chapter Names
+- **From Metadata:** Chapter names are automatically extracted from the "Title" tag in audio file metadata
+- **Fallback:** If no title tag exists, the filename is used as the chapter name
+- **Order:** Chapters appear in alphabetical order by filename
+
+#### Batch Processing
+- Add multiple folders and click "Start" to process them all sequentially
+- Each folder becomes a separate M4B file
+- Progress is tracked in the Status Log
+
+## Building from Source
+
+### Prerequisites
+
+1. **Node.js 16 or higher**
    ```bash
-   python m4b_creator.py
+   node --version
    ```
 
-2. **Add folders**
-   - Click "+ Ordner" (Add Folder) button
-   - Select one or multiple folders containing audio files
-   - Or drag and drop folders into the list
+2. **npm** (comes with Node.js)
+   ```bash
+   npm --version
+   ```
 
-3. **Configure settings**
-   - Select quality mode: Original or Re-encode (AAC 128k)
-   - Enable "Rekursiv" if you want to include subfolders
-   - Choose output directory (leave empty to use source folder)
+3. **FFmpeg** (see installation above)
 
-4. **Edit metadata** (optional)
-   - Select a folder from the list
-   - Switch to "Metadaten" tab
-   - Edit title, artist, album, year, genre
-   - Upload custom cover artwork if desired
-   - Click "💾 Änderungen speichern" to save changes
+### Build Steps
 
-5. **Manage chapters** (optional)
-   - Select a folder from the list
-   - Switch to "Kapitel-Reihenfolge" tab
-   - Select a chapter and use ↑/↓ buttons to reorder
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yourusername/m4b-creator-electron.git
+   cd m4b-creator-electron
+   ```
 
-6. **Start batch processing**
-   - Click "⚡ Batch-Verarbeitung starten"
-   - Monitor progress in the status window
-   - Output files will be created in the specified directory
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-### Batch Metadata Application
+3. **Run in Development Mode**
+   ```bash
+   npm run dev
+   ```
 
-To apply the same metadata (author, year, genre) to all folders:
+4. **Build for Production**
+   ```bash
+   npm run electron:build
+   ```
 
-1. Click "Metadaten auf alle anwenden"
-2. Fill in the common fields (leave empty to skip)
-3. Click "Anwenden"
-4. Note: Title and Album are NOT overwritten as they should be unique per folder
+   The portable executable will be created in `dist-electron/M4B-Creator-v1.0.3-Portable.exe`
 
-### Drag & Drop Support
+### Project Structure
 
-The application supports drag and drop for folders:
-- Simply drag folders from Windows Explorer onto the folder list
-- Multiple folders can be dropped at once
-
-**Note:** Drag & Drop requires `windnd` (Windows) or `tkinterdnd2` (cross-platform)
-
-## Output Format
-
-The tool creates M4B (MPEG-4 Audio Book) files with:
-- **Codec:** AAC (original or re-encoded)
-- **Container:** MP4/M4B
-- **Chapters:** One chapter per input file
-- **Metadata:** Complete metadata embedding
-- **Cover Art:** Embedded as attached picture (PNG format)
-
-## Supported Input Formats
-
-- MP3 (.mp3)
-- M4A (.m4a)
-- M4B (.m4b)
-- AAC (.aac)
-- OGG Vorbis (.ogg)
-- FLAC (.flac)
-- WAV (.wav)
-- WMA (.wma)
+```
+m4b-creator-electron/
+├── electron/
+│   ├── main.js          # Electron main process
+│   └── preload.js       # Preload script (IPC bridge)
+├── src/
+│   ├── App.tsx          # Main React component
+│   ├── MetadataTab.tsx  # Metadata editor component
+│   ├── global.d.ts      # TypeScript definitions
+│   ├── index.css        # Tailwind CSS styles
+│   └── main.tsx         # React entry point
+├── public/
+│   └── index.html       # HTML template
+├── package.json         # Project dependencies
+├── tsconfig.json        # TypeScript configuration
+├── vite.config.ts       # Vite build configuration
+└── README.md            # This file
+```
 
 ## Technical Details
 
 ### How It Works
 
-1. **File Discovery**
-   - Scans selected folders for audio files
+1. **Folder Scanning**
+   - Scans dropped/selected folders for supported audio files
+   - Extracts metadata using FFprobe
    - Sorts files alphabetically
-   - Optionally includes subfolders recursively
 
 2. **Metadata Extraction**
-   - Uses FFprobe to extract existing metadata
-   - Reads embedded cover art from audio files
+   - Reads title, artist, album, year, genre from existing file metadata
+   - Detects and extracts embedded cover art
    - Calculates total duration
 
-3. **Chapter Creation**
-   - Each input file becomes one chapter
-   - Chapter titles are numbered (Chapter 1, Chapter 2, etc.)
-   - Timestamps are calculated based on file durations
-
-4. **M4B Assembly**
+3. **M4B Creation**
    - Creates FFmpeg concat file list
-   - Generates FFMETADATA1 format metadata file
-   - Extracts or uses custom cover art (converted to PNG)
-   - Concatenates audio streams
-   - Embeds metadata and chapters
-   - Adds cover as attached picture
+   - Generates FFMETADATA1 format metadata with chapters
+   - Each audio file becomes one chapter
+   - Chapter titles use the "Title" metadata tag or filename
+   - Embeds cover art as attached picture (PNG format)
+   - Concatenates audio streams with metadata
 
-5. **Output**
+4. **Output**
    - Single M4B file per folder
-   - Temporary files are automatically cleaned up
+   - Temporary files automatically cleaned up
+   - M4B files compatible with all major audiobook players
 
-## Building from Source
+### Technologies Used
 
-See [BUILD.md](BUILD.md) for detailed build instructions including:
-- How to build the Windows executable
-- Dependencies and requirements
-- Troubleshooting common build issues
-
-## File Size Estimation
-
-| Bitrate | Quality | Size per Hour | Use Case |
-|---------|---------|---------------|----------|
-| 32k | Low | ~14 MB | Podcasts, tight storage |
-| 48k | Good | ~21 MB | Spoken word audiobooks |
-| 64k | Very Good | ~28 MB | Standard audiobooks |
-| 96k | Excellent | ~42 MB | High-quality audiobooks |
-| 128k | Premium | ~56 MB | Music audiobooks |
-| Original | Varies | Varies | No quality loss |
+- **Electron 25.9.8** - Cross-platform desktop framework
+- **React 18** - UI framework
+- **TypeScript** - Type-safe JavaScript
+- **Vite** - Fast build tool
+- **Tailwind CSS** - Utility-first CSS framework
+- **Lucide React** - Icon library
+- **FFmpeg** - Audio processing engine
 
 ## Troubleshooting
 
 ### FFmpeg Not Found
+
 ```
 Error: FFmpeg is not installed or not in PATH
 ```
-**Solution:** Install FFmpeg and ensure it's in your system PATH. Test with `ffmpeg -version`
 
-### No Audio Files Found
-```
-Keine Audiodateien in [folder] gefunden!
-```
-**Solution:** Verify the folder contains supported audio files (.mp3, .m4a, etc.)
-
-### Permission Denied
-```
-Permission denied
-```
-**Solution:** Ensure you have write permissions for the output directory
-
-### GUI Does Not Start
-```
-ModuleNotFoundError: No module named 'tkinter'
-```
 **Solution:**
-- **Windows:** Reinstall Python with tkinter support
-- **Linux:** `sudo apt install python3-tk`
-- **macOS:** tkinter is included with Python
+1. Install FFmpeg using WinGet: `winget install Gyan.FFmpeg`
+2. Or download manually and add to PATH
+3. Restart the application
+4. Test with `ffmpeg -version` in terminal
+
+### Application Won't Start
+
+**Solution:**
+1. Make sure you have Windows 10/11 (64-bit)
+2. Try running as Administrator
+3. Check Windows Defender hasn't blocked the .exe
+4. Ensure FFmpeg is installed and in PATH
+
+### No Audio Files Detected
+
+```
+Keine Audiodateien gefunden!
+```
+
+**Solution:**
+1. Verify folder contains supported audio files (.mp3, .m4a, .m4b, etc.)
+2. Check file extensions are correct
+3. Ensure files are not corrupted
 
 ### Drag & Drop Not Working
-Drag & Drop is optional. If not available:
-- Use the "+ Ordner" button instead
-- Install `windnd` for Windows: `pip install windnd`
-- Or install `tkinterdnd2` for cross-platform: `pip install tkinterdnd2`
+
+**Solution:**
+1. Close and restart the application
+2. Use the "Ordner hinzufügen" button instead
+3. Make sure you're dragging folders, not individual files
+
+### M4B Creation Fails
+
+**Solution:**
+1. Check the Status Log for detailed error messages
+2. Ensure output directory has write permissions
+3. Verify input audio files are not corrupted
+4. Try with "Original Qualität" instead of re-encoding
 
 ## Known Limitations
 
-- **GUI Language:** Currently German (English version planned)
-- **Chapter Titles:** Automatically numbered (custom titles planned)
-- **Large Files:** Very large audiobooks (100+ hours) may take time to process
-- **Drag & Drop:** Requires optional dependency installation
+- **Windows Only:** Currently only builds for Windows (Mac/Linux support planned)
+- **Large Files:** Very large audiobooks (100+ hours) may take significant time
+- **GUI Language:** Primarily German (English translation in progress)
 
 ## Roadmap
 
-- [ ] English language version
+### Version 1.1
+- [ ] Complete English translation
 - [ ] Custom chapter title editing
-- [ ] Progress bar during processing
+- [ ] Drag to reorder chapters
 - [ ] Audio preview/playback
+
+### Version 1.2
+- [ ] Mac and Linux builds
 - [ ] Automatic chapter detection from silence
-- [ ] Batch cover download from online sources
-- [ ] Command-line interface (CLI) mode
-- [ ] Preset templates for common audiobook formats
+- [ ] Batch metadata editor
+- [ ] Cover art search/download
+
+### Version 2.0
+- [ ] Built-in audio player
+- [ ] Chapter splitting and merging
+- [ ] Subtitle/description support
+- [ ] Cloud storage integration
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please follow these steps:
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
@@ -324,19 +345,25 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-- Built with Python and tkinter
+- Built with Electron and React
 - Audio processing powered by [FFmpeg](https://ffmpeg.org/)
-- Image handling by [Pillow](https://python-pillow.org/)
-- Drag & Drop support via [windnd](https://github.com/Eliav2/pywindnd) and [tkinterdnd2](https://github.com/pmgagne/tkinterdnd2)
+- UI components by [Lucide React](https://lucide.dev/)
+- Styled with [Tailwind CSS](https://tailwindcss.com/)
 
 ## Support
 
-If you encounter any issues:
+If you encounter issues:
+
 1. Check that FFmpeg is installed: `ffmpeg -version`
-2. Verify input files are valid audio files
-3. Check the status log in the GUI for detailed error messages
-4. Review the console output for additional information
-5. Open an issue on GitHub with error details
+2. Review the Status Log in the application
+3. Check the [Troubleshooting](#troubleshooting) section
+4. Open an issue on GitHub.
+   - Error message from Status Log
+   - Steps to reproduce
+   - Your system information (Windows version, FFmpeg version)
+
+
+
 
 ## Author
 
