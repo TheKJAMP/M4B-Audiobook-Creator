@@ -21,14 +21,6 @@ Not Ready: ❌
 
 
 
-### More Languages Version 1.3: 
-- [❌] French
-- [❌] Spanish
-- [❌] Japanese
-- [❌] Chinese
-- If there are any translation errors, please report them immediately.
-I don't speak any of these languages and have to rely on translation tools. 
-
 ## Screenshots
 Update 1.02
 
